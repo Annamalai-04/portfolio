@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "soft":"Problem Solving",
+        "hard":"HTML/CSS",
+        "hobby":"Bike Driving"
+    },
+    {
+        "id":2,
+        "soft":"Decision Making",
+        "hard":"JAVASCRIPT",
+        "hobby":"Traveling to HillStations"
+    },
+    {
+        "id":3,
+        "soft":"LeaderShip",
+        "hard":"REACTjs",
+        "hobby":"Gardening and Forming"
+    },
+    {
+        "id":4,
+        "soft":"Creative & Logical Thinking",
+        "hard":"JAVA",
+        "hobby":"Drawing and Painting"
+    },
+    {
+        "id":5,
+        "soft":"Flexible and Adaptability",
+        "hard":"SPRING",
+        "hobby":"Movies and Musics"
+    }
+]
