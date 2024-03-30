@@ -58,7 +58,7 @@ function HardSkills(props){
   return(
 <div id='b2'><h1 style={{color:'limegreen'}}>Technical Skills</h1>
       <ol style={{listStyle:'none'}}>
-      {items.map((temp)=>(<li key={temp.id}>{temp.hard}</li>))}
+      {items.map((temp)=>(<li id='skillset' key={temp.id}>{temp.hard}</li>))}
       </ol>
       </div>
   )
@@ -69,7 +69,7 @@ function Hobbies(props){
   return(
     <div id='b3'><h1 style={{color:'limegreen'}}>Hobbies & Interests</h1>
     <ol style={{listStyle:'none'}}>
-    {items.map((temp)=>(<li key={temp.id}>{temp.hobby}</li>))}
+    {items.map((temp)=>(<li id='skillset' key={temp.id}>{temp.hobby}</li>))}
     </ol>
     </div>
   )

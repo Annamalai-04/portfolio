@@ -15,7 +15,7 @@ function Box1(){
         <div id='box'>
           {Product.map((temp)=>(
           <div id='show'>
-            <img className='image' src={temp.src} width={'100px'} alt='img'></img>
+            <img className='images' src={temp.src} alt='img'></img>
             <h5>{temp.Sname}</h5>
             <h5>{temp.Dname}</h5>
           </div>))}

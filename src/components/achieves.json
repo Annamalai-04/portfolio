@@ -3,42 +3,49 @@
         "id":1,
         "Dname":"COURSERA",
         "Sname":"Meta Html/css",
-        "src":"C_page-0001.jpg"
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~58K4QUJ4TN3K/CERTIFICATE_LANDING_PAGE~58K4QUJ4TN3K.jpeg"
     },
     {
         "id":2,
         "Dname":"COURSERA",
         "Sname":"Meta Database",
-        "src":"C_page-0001.jpg"
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~F2YF4GVZEP45/CERTIFICATE_LANDING_PAGE~F2YF4GVZEP45.jpeg"
         },
     {
         "id":3,
         "Dname":"COURSERA",
         "Sname":"Meta Javascript",
-        "src":"C_page-0001.jpg"
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~YH4TUAY7NXHE/CERTIFICATE_LANDING_PAGE~YH4TUAY7NXHE.jpeg"
     },
     {
         "id":4,
         "Dname":"COURSERA",
         "Sname":"Meta Reactjs",
-        "src":"C_page-0001.jpg"
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~4V9E9LHC289H/CERTIFICATE_LANDING_PAGE~4V9E9LHC289H.jpeg"
     },
     {
         "id":5,
         "Dname":"COURSERA",
-        "Sname":"Meta Reactjs",
-        "src":"C_page-0001.jpg"
+        "Sname":"Meta UI/UX Design",
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~N53LBMQULVW2/CERTIFICATE_LANDING_PAGE~N53LBMQULVW2.jpeg"
     },
     {
         "id":6,
         "Dname":"COURSERA",
-        "Sname":"Meta Reactjs",
-        "src":"C_page-0001.jpg"
+        "Sname":"Meta Version Control",
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~RGQZHVZVKXJ4/CERTIFICATE_LANDING_PAGE~RGQZHVZVKXJ4.jpeg"
     },
     {
         "id":7,
         "Dname":"COURSERA",
-        "Sname":"Meta Reactjs",
-        "src":"C_page-0001.jpg"
+        "Sname":"Meta Coding Interview",
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~GHWYJC94Z8HR/CERTIFICATE_LANDING_PAGE~GHWYJC94Z8HR.jpeg"
+    },
+    {
+        "id":8,
+        "Dname":"COURSERA",
+        "Sname":"Meta FrontEnd Technologies",
+        "src":"https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~89NC36V5DE3X/CERTIFICATE_LANDING_PAGE~89NC36V5DE3X.jpeg"
     }
+
 ]

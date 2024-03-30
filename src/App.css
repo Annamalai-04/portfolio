@@ -5,17 +5,17 @@
   text-align: center;
   position: absolute;
   width: 100%;
-  
 }
 #nav{
   list-style: none;
   display: flex;
   justify-content: space-around;
   font-size: 30px;
-  background-color: transparent;
   margin-bottom: 0px;
 }
 #nav>li a{
+  
+  position: fixed;
   text-decoration: none;
 }
 #nav>li a:hover{

@@ -2,11 +2,11 @@
 {
 #ach{
     width: 100%;
-    height: 100vh;
     position: absolute;
     z-index: -1;
     top: 0px;
     background-image: url('../public/feed.jpg');
+    background-attachment: fixed;
     background-size: cover;
     background-position: center;
     padding-top: 5%;
@@ -15,12 +15,17 @@
   #box{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    color: rgb(9, 137, 249);
+    color: rgb(105, 175, 237);
     gap: 10px;
   }
   #show{
     position: relative;
-    background-color: aliceblue;
+    background-color: transparent;
+  }
+  .images{
+    width: 100%;
+    border-radius: 20px;
+    background-color: transparent;
   }
 }
 @media Screen and (max-width:500px)
@@ -43,14 +48,19 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     color: rgb(9, 137, 249);
-    gap: 10px;
+    gap: 5px;
   }
   #show{
     position: relative;
     background-color: aliceblue;
-    font-size: 10px;
+    margin: 5px;
   }
   #show>h5{
-    font-size: small;
+    text-align: center;
+    font-size: 10px;
+  }
+  .images{
+    width: 100%;
+    border-radius: 20px;
   }
 }
