@@ -32,3 +32,5 @@ Optional repository variable `SITE_ORIGIN` sets the real public origin, e.g. `ht
 After secrets and runner connectivity are ready: Actions → Portfolio CI/CD → Run workflow → main. Subsequent pushes to main run it automatically. Docker Hub receives a tag matching the Git commit SHA and `latest`; the EC2 deployment receives the exact build digest. The existing `1.0.0` tag is not overwritten.
 
 The first commit can run CI without deployment secrets. Actual publishing/deployment cannot be verified until you provide the secrets and a reachable runner. GitHub Actions billing depends on your account, repository visibility, and runner usage; this workflow does not change your GitHub or AWS plan.
+
+Existing secret names DOCKER_USERNAME and EC2_SSH_KEY are also accepted as aliases for DOCKERHUB_USERNAME and EC2_SSH_PRIVATE_KEY. No secret values need to be duplicated.
