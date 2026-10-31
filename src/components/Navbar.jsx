@@ -1,0 +1,4 @@
+import {useState} from 'react';import {Menu,X} from 'lucide-react';
+import HireStar from './HireStar';
+export const sections=['Home','About','Skills','Experience','Projects','Education','Contact'];
+export default function Navbar({active}){const[open,setOpen]=useState(false);return <header className="nav-shell"><nav className="nav" aria-label="Main navigation"><a className="wordmark" href="#home">a<span>.</span><small>ANNAMALAI</small></a><div className={`nav-links ${open?'is-open':''}`}>{sections.map(s=><a key={s} href={`#${s.toLowerCase()}`} className={active===s.toLowerCase()?'active':''} aria-current={active===s.toLowerCase()?'location':undefined} onClick={()=>setOpen(false)}>{s}</a>)}</div><HireStar onClick={()=>setOpen(false)}/><button className="menu-toggle" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button></nav></header>}

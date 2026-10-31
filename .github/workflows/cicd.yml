@@ -1,0 +1,155 @@
+name: Portfolio CI/CD
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      mongo:
+        image: mongo:7.0
+        ports: ['27017:27017']
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)'"
+          --health-interval 10s --health-timeout 5s --health-retries 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+        env:
+          TEST_MONGODB: '1'
+          MONGODB_URI: mongodb://127.0.0.1:27017
+      - run: npm run build
+
+  configuration:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-24.04
+    outputs:
+      publish: ${{ steps.check.outputs.publish }}
+      deploy: ${{ steps.check.outputs.deploy }}
+    steps:
+      - id: check
+        shell: bash
+        env:
+          HUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+          HUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          EC2_HOST_KEYS: ${{ secrets.EC2_SSH_KNOWN_HOSTS }}
+        run: |
+          if [[ -n "$HUB_USER" && -n "$HUB_TOKEN" ]]; then
+            echo 'publish=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
+            echo '::notice::Docker publishing skipped. Configure DOCKERHUB_USERNAME and DOCKERHUB_TOKEN, then run this workflow again.'
+          fi
+          if [[ -n "$EC2_HOST" && -n "$EC2_USER" && -n "$EC2_KEY" && -n "$EC2_HOST_KEYS" ]]; then
+            echo 'deploy=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'deploy=false' >> "$GITHUB_OUTPUT"
+            echo '::notice::EC2 deployment skipped. Configure the four EC2 secrets documented in deploy/CICD.md.'
+          fi
+
+  publish:
+    needs: [test, configuration]
+    if: needs.configuration.outputs.publish == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      image: ${{ steps.image.outputs.reference }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - id: build
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            annamalaikumar/portfolio-3d:${{ github.sha }}
+            annamalaikumar/portfolio-3d:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - id: image
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: echo "reference=annamalaikumar/portfolio-3d@$DIGEST" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: [configuration, publish]
+    if: needs.configuration.outputs.deploy == 'true'
+    # Use an SSH-reachable Linux runner. See deploy/CICD.md for the current firewall.
+    runs-on: ${{ fromJSON(vars.DEPLOY_RUNNER_LABELS || '["ubuntu-24.04"]') }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Deploy immutable image over verified SSH
+        shell: bash
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          EC2_SSH_KNOWN_HOSTS: ${{ secrets.EC2_SSH_KNOWN_HOSTS }}
+          IMAGE: ${{ needs.publish.outputs.image }}
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+        run: |
+          set -euo pipefail
+          [[ "$EC2_HOST" =~ ^[a-zA-Z0-9.-]+$ ]] || { echo 'Invalid EC2_HOST'; exit 1; }
+          [[ "$EC2_USER" =~ ^[a-z_][a-z0-9_-]*$ ]] || { echo 'Invalid EC2_USER'; exit 1; }
+          [[ "$IMAGE" =~ ^annamalaikumar/portfolio-3d@sha256:[a-f0-9]{64}$ ]] || exit 1
+          SITE_ORIGIN="${SITE_ORIGIN:-http://$EC2_HOST}"
+          [[ "$SITE_ORIGIN" =~ ^https?://[a-zA-Z0-9.-]+(:[0-9]+)?$ ]] || { echo 'Invalid SITE_ORIGIN'; exit 1; }
+          key="$RUNNER_TEMP/portfolio-key"
+          hosts="$RUNNER_TEMP/portfolio-known-hosts"
+          trap 'rm -f "$key" "$hosts"' EXIT
+          umask 077
+          printf '%s\n' "$EC2_SSH_PRIVATE_KEY" | tr -d '\r' > "$key"
+          printf '%s\n' "$EC2_SSH_KNOWN_HOSTS" | tr -d '\r' > "$hosts"
+          options=(-i "$key" -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$hosts" -o ConnectTimeout=20)
+          if ! ssh "${options[@]}" "$EC2_USER@$EC2_HOST" 'true'; then
+            echo '::error::SSH unavailable. Allow this trusted runner in the EC2 SSH rule or use a self-hosted Linux runner on an allowed network. Do not expose SSH globally.'
+            exit 1
+          fi
+          ssh "${options[@]}" "$EC2_USER@$EC2_HOST" 'mkdir -p /home/ubuntu/portfolio-deploy/ci'
+          scp "${options[@]}" deploy/ci-deploy.sh "$EC2_USER@$EC2_HOST:/home/ubuntu/portfolio-deploy/ci/ci-deploy.sh"
+          # Arguments are deliberately expanded locally after validation above.
+          # shellcheck disable=SC2029
+          ssh "${options[@]}" "$EC2_USER@$EC2_HOST" "bash /home/ubuntu/portfolio-deploy/ci/ci-deploy.sh '$IMAGE' '$SITE_ORIGIN'"
+      - name: Verify public site
+        shell: bash
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+        run: |
+          set -euo pipefail
+          origin="${SITE_ORIGIN:-http://$EC2_HOST}"
+          curl --fail --retry 10 --retry-delay 3 "$origin/" -o /dev/null
+          curl --fail --retry 10 --retry-delay 3 "$origin/api/health"

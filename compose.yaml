@@ -1,0 +1,26 @@
+services:
+  portfolio:
+    build: .
+    image: annamalaikumar/portfolio-3d:1.0.0
+    ports: ["127.0.0.1:8080:3001"]
+    environment:
+      MONGODB_URI: mongodb://portfolio:${MONGO_PASSWORD:?Set MONGO_PASSWORD}@mongo:27017/myportfolio?authSource=admin
+      SITE_ORIGIN: http://127.0.0.1:8080
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+  mongo:
+    image: mongo:8.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: portfolio
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:?Set MONGO_PASSWORD}
+    volumes: ["mongo-data:/data/db"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "quit(db.adminCommand('ping').ok ? 0 : 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+volumes:
+  mongo-data:

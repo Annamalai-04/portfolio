@@ -1,0 +1,15 @@
+.portrait-orbit{position:relative;isolation:isolate;width:100%;max-width:420px;aspect-ratio:1;margin-inline:auto;display:grid;place-items:center;perspective:1000px}
+.portrait-orbit::before{content:'';position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle,#64e9d334,#6854bf18 55%,transparent 73%);filter:blur(22px);z-index:-1}
+.portrait-orbit::after{content:'';position:absolute;width:62%;height:10%;bottom:-1%;border-radius:50%;background:#0009;filter:blur(15px);z-index:-1}
+.portrait-medallion{width:82%;aspect-ratio:1;padding:10px;border-radius:50%;background:linear-gradient(135deg,#b8fff0,#5ea397 26%,#172e40 55%,#7771b6 78%,#b4f7e8);border:1px solid #9af2e288;box-shadow:6px 12px 0 #142731,9px 18px 0 #0c1722,13px 25px 35px #0009,0 0 35px #60e7ce16;transform:rotateY(-9deg) rotateX(5deg);transition:transform .6s ease,box-shadow .6s ease}
+.portrait-orbit:hover .portrait-medallion{transform:rotateY(3deg) rotateX(-3deg) translateY(-5px);box-shadow:4px 10px 0 #142731,7px 16px 0 #0c1722,10px 25px 40px #0009,0 0 45px #60e7ce28}
+.portrait-circle{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;background:#cdd5d4;border:5px solid #0d1821}
+.portrait-circle .portrait-photo{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.portrait-orbit-ring{position:absolute;inset:0;border-radius:50%;border:1px solid #7fe5d32e;transform:rotateZ(-25deg) rotateX(23deg);pointer-events:none}
+.portrait-orbit-ring::before{content:'';position:absolute;inset:12px;border:1px dashed #8182bb3b;border-radius:50%}
+.portrait-orbit-ring::after{content:'';position:absolute;top:18%;right:10%;width:9px;height:9px;background:#8bf3dc;border-radius:50%;box-shadow:0 0 17px #75e9ce99}
+.portrait-orbit .portrait-note{bottom:2%;left:50%;transform:translateX(-50%);z-index:2;display:flex;align-items:center;gap:9px;padding:12px 18px;border:1px solid #5d9b8d66;border-radius:24px;background:linear-gradient(135deg,#183038f2,#101a28f2);box-shadow:0 8px 20px #0006;color:#b7e4dc;font:9px monospace;letter-spacing:1.5px;white-space:nowrap}
+.portrait-code{position:absolute;top:14%;left:0;padding:13px 11px;border-radius:12px;border:1px solid #658a9d66;background:linear-gradient(135deg,#23374a,#101a28);color:#9eeedc;font:19px monospace;box-shadow:0 10px 25px #0005;transform:rotate(-12deg)}
+@media(max-width:800px){.portrait-medallion{padding:7px}.portrait-code{font-size:14px;padding:10px}}
+@media(max-width:540px){.portrait-orbit{max-width:320px;margin-block:5px 15px}}
+@media(prefers-reduced-motion:reduce){.portrait-medallion,.portrait-orbit:hover .portrait-medallion{transform:none;transition:none}}

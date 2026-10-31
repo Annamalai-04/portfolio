@@ -1,0 +1,23 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { once } from 'node:events';
+import { staticHandler } from '../server/static.js';
+import { createApp } from '../server/app.js';
+test('production server serves SPA/assets while preserving API routes',async t=>{
+ const directory=await mkdtemp(join(tmpdir(),'portfolio-static-'));
+ await writeFile(join(directory,'index.html'),'<h1>Portfolio</h1>');
+ await writeFile(join(directory,'app.js'),'console.log("test")');
+ const app=createApp({collection:{insertOne:async()=>({})},serveStatic:staticHandler(directory)});
+ app.listen(0,'127.0.0.1');await once(app,'listening');
+ t.after(async()=>{await new Promise(resolve=>app.close(resolve));await rm(directory,{recursive:true,force:true})});
+ const origin=`http://127.0.0.1:${app.address().port}`;
+ assert.match(await (await fetch(origin+'/')).text(),/Portfolio/);
+ assert.match(await (await fetch(origin+'/some-route')).text(),/Portfolio/);
+ const asset=await fetch(origin+'/app.js');assert.equal(asset.status,200);assert.match(asset.headers.get('content-type'),/javascript/);
+ assert.equal((await fetch(origin+'/missing.png')).status,404);
+ assert.equal((await fetch(origin+'/api/not-found')).status,404);
+ assert.equal((await fetch(origin+'/api/health')).status,200);
+});

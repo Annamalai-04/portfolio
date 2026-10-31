@@ -1,0 +1,3 @@
+.contact-layout select{display:block;width:100%;margin-top:12px;padding:15px;background:#101620;color:#e0eaf2;border:1px solid #283440;border-radius:4px;font:inherit;font-size:16px;min-height:51px;outline:none}
+.contact-layout select:focus{border-color:var(--accent)}.contact-layout select option{background:#101620;color:#e0eaf2}
+.contact-layout .mobile-help{font-size:12px;margin-top:-14px;margin-bottom:22px}.whatsapp-choice{display:flex;align-items:center;gap:12px;font-size:15px;cursor:pointer}.whatsapp-choice input{appearance:auto;accent-color:var(--accent);width:20px;height:20px;margin:0;flex-shrink:0}.contact-layout .contact-privacy{font-size:13px;line-height:1.7;margin-bottom:25px}.whatsapp-next{margin-top:20px}.whatsapp-next p{font-size:13px!important}

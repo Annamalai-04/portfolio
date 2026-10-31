@@ -1,0 +1,115 @@
+/* A comfortable reading scale for content, controls, and supporting details. */
+body { font-size: 16px; }
+p, .about-grid p, .section-heading p, .hero-description, .experience-detail p,
+.project-copy p, .contact-layout p, .projects-empty p { font-size: 16px; line-height: 1.8; }
+h2 { font-size: 46px; line-height: 1.18; }
+.nav-links { gap: 23px; }
+.nav-links a { font-size: 14px; }
+.wordmark small { font-size: 12px; }
+.hello { font-size: 23px; }
+.role-line { font-size: 19px; height: 30px; }
+.eyebrow, .section-label { font-size: 12px; letter-spacing: 1.5px; }
+.button { font-size: 14px; min-height: 49px; gap: 14px; }
+.button svg, .text-link svg { width: 20px; height: 20px; flex-shrink: 0; }
+.hero-buttons { flex-wrap: wrap; }
+.socials { gap: 22px; }
+.socials svg { width: 23px; height: 23px; }
+.socials a { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; min-height: 32px; }
+.hero-social>span:last-child { font-size: 10px; }
+.text-link, .contact-email { font-size: 15px; }
+.stats span { font-size: 13px; line-height: 1.5; display: block; margin-top: 7px; }
+.stats { gap: 16px; }
+.stats strong { white-space: nowrap; }
+.muted { font-size: 12px; display: inline-block; margin-top: 12px; }
+.skill-category { gap: 15px; }
+.skill-category>svg { width: 28px; height: 28px; flex-shrink: 0; }
+.skill-category>span { font-size: 16px; min-width: 0; line-height: 1.4; }
+.skill-category small { font-size: 12px; line-height: 1.5; }
+.skill-category b { font-size: 12px; }
+.panel-top>span, .panel-note { font-size: 11px; line-height: 1.6; }
+.panel-top>svg { width: 21px; height: 21px; }
+.technology-heading h3 { font-size: 24px; }
+.technology-grid>div { min-height: 125px; }
+.technology-grid>div>svg:first-child { width: 36px; height: 36px; }
+.technology-grid>div>svg:last-child { width: 15px; height: 15px; }
+.technology-grid span { font-size: 14px; text-align: center; padding-inline: 8px; }
+.experience-dates { font-size: 15px; line-height: 1.6; }
+.experience-dates small, .experience-card button>span>span { font-size: 13px; }
+.experience-card h3 { font-size: 25px; }
+.tags span { font-size: 12px; padding: 7px 10px; }
+.project-filter button, .project-actions { font-size: 13px; }
+.project-kicker { font-size: 12px; }
+.education-stack .education-card h3 { font-size: 25px; }
+.education-card .section-label { font-size: 11px; }
+.education-card p, .certification-card p { font-size: 15px; }
+.education-card small, .certification-card small { font-size: 13px; line-height: 1.6; }
+.education-card>svg, .certification-card>svg { width: 34px; height: 34px; flex-shrink: 0; }
+.certification-card h3 { font-size: 20px; }
+.certifications-heading h3 { font-size: 23px; }
+.certifications-heading>svg { width: 25px; height: 25px; flex-shrink: 0; }
+label { font-size: 14px; }
+input, textarea { font-size: 16px; padding: 15px; }
+.contact-layout .form-status { font-size: 13px!important; line-height: 1.6; }
+.footer-links { font-size: 14px; }
+footer>div:first-child>p { font-size: 13px; }
+.footer-bottom { font-size: 12px; line-height: 1.6; }
+.footer-bottom>a>svg { width: 23px; height: 23px; }
+.tech-showcase-title { font-size: 18px; }
+.tech-logo svg { width: 43px; height: 43px; }
+.tech-logo span { font-size: 29px; }
+.tech-logo-ai span { font-size: 23px; }
+.tech-motion-toggle { font-size: 12px; }
+.tech-motion-toggle svg { width: 15px; height: 15px; }
+.hire-star>span { font-size: 12px; }
+@media(max-width:1150px) {
+  .nav-links { gap: 17px; }
+  .nav-links a { font-size: 13px; }
+  .tech-logo span { font-size: 24px; }
+  .tech-logo svg { width: 35px; height: 35px; }
+  .hero-social>span:last-child { font-size: 9px; }
+}
+@media(max-width:800px) {
+  h2 { font-size: 38px; }
+  .skill-categories { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .skill-category>span { font-size: 14px; }
+  .skill-category>svg { width: 25px; height: 25px; }
+  .nav-links a { font-size: 16px; }
+  .hero-social>span:last-child { font-size: 10px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .education-stack .education-card h3 { font-size: 22px; }
+  .tech-showcase-title { font-size: 16px; }
+  .hire-star>span { font-size: 10px; }
+}
+@media(max-width:540px) {
+  p, .about-grid p, .section-heading p, .hero-description, .experience-detail p,
+  .project-copy p, .contact-layout p, .projects-empty p { font-size: 15px; }
+  .hello { font-size: 21px; }
+  .role-line { font-size: 16px; }
+  .eyebrow, .section-label { font-size: 11px; letter-spacing: 1px; }
+  .hero-description { line-height: 1.8; }
+  .hero-social { flex-wrap: wrap; }
+  .hero-social>span:last-child { font-size: 9px; }
+  .button { font-size: 13px; padding: 13px 14px; gap: 10px; }
+  .stats { gap: 10px; }
+  .stats strong { font-size: 21px; }
+  .stats span { font-size: 12px; }
+  .skill-category { padding: 15px 12px; gap: 10px; }
+  .skill-category>span { font-size: 14px; }
+  .technology-grid span { font-size: 12px; overflow-wrap: anywhere; }
+  .technology-grid>div>svg:first-child { width: 32px; height: 32px; }
+  .panel-top>span { font-size: 9px; }
+  .experience-dates small { font-size: 12px; }
+  .experience-card { padding: 20px; }
+  .experience-card h3 { font-size: 23px; }
+  .education-card>svg { width: 29px; height: 29px; }
+  .education-card .section-label { font-size: 10px; }
+  .education-card p, .certification-card p { font-size: 14px; }
+  .certifications-heading h3 { font-size: 20px; }
+  .contact-email { font-size: 14px; }
+  .footer-bottom { font-size: 10px; flex-wrap: wrap; gap: 15px; }
+  .footer-bottom>span:nth-child(2) { max-width: 140px; }
+  .wordmark small { font-size: 9px; }
+  .tech-showcase-title { font-size: 15px; }
+  .tech-logo span { font-size: 24px; }
+  .tech-logo svg { width: 32px; height: 32px; }
+}
