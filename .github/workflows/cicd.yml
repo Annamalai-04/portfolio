@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     outputs:
-      image: ${{ steps.image.outputs.reference }}
+      digest: ${{ steps.build.outputs.digest }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -96,11 +96,6 @@ jobs:
             annamalaikumar/portfolio-3d:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - id: image
-        env:
-          DIGEST: ${{ steps.build.outputs.digest }}
-        run: echo "reference=annamalaikumar/portfolio-3d@$DIGEST" >> "$GITHUB_OUTPUT"
-
   deploy:
     needs: [configuration, publish]
     if: needs.configuration.outputs.deploy == 'true'
@@ -118,7 +113,7 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY || secrets.EC2_SSH_KEY }}
           EC2_SSH_KNOWN_HOSTS: ${{ secrets.EC2_SSH_KNOWN_HOSTS }}
-          IMAGE: ${{ needs.publish.outputs.image }}
+          IMAGE: annamalaikumar/portfolio-3d@${{ needs.publish.outputs.digest }}
           SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
         run: |
           set -euo pipefail
