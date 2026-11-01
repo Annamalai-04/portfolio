@@ -14,7 +14,7 @@ export default function About() {
             className="portrait-photo"
             src="/images/annamalai.jpg"
             alt="Annamalai"
-            loading="lazy"
+            loading="eager"
             decoding="async"
           />
           </div>

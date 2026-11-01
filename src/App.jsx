@@ -42,6 +42,9 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="page-atmosphere" aria-hidden="true">
+        {Array.from({ length: 8 }, (_, index) => (
+          <span className={`atmosphere-color atmosphere-color-${index}`} key={index} />
+        ))}
         <span className="atmosphere-wave atmosphere-wave-one" />
         <span className="atmosphere-wave atmosphere-wave-two" />
       </div>

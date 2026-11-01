@@ -4,8 +4,17 @@ html, body { overflow-x: clip; }
 body { background: #080d16; }
 body::before { display: none; }
 #root { position: relative; isolation: isolate; }
-.page-atmosphere { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; background-color: rgb(var(--ambient-color)); transition: background-color 450ms ease-out; }
-.atmosphere-wave { position: absolute; inset: -25%; pointer-events: none; background: radial-gradient(ellipse at 23% 37%, rgb(var(--ambient-glow) / .24), transparent 46%), radial-gradient(ellipse at 76% 65%, rgb(var(--ambient-glow) / .15), transparent 47%); background-size: 150% 170%; filter: blur(28px); will-change: transform, opacity; }
+.page-atmosphere { position: fixed; inset: 0; height: 100lvh; z-index: -2; pointer-events: none; overflow: hidden; background: #14253c; transform: translateZ(0); contain: strict; }
+.atmosphere-color { position: absolute; inset: 0; opacity: 0; transition: opacity 180ms linear; }
+.atmosphere-color-0 { background: #14253c; opacity: 1; }
+.atmosphere-color-1 { background: #281f41; }
+.atmosphere-color-2 { background: #113a38; }
+.atmosphere-color-3 { background: #2d1e46; }
+.atmosphere-color-4 { background: #152d49; }
+.atmosphere-color-5 { background: #401d36; }
+.atmosphere-color-6 { background: #392e1b; }
+.atmosphere-color-7 { background: #113930; }
+.atmosphere-wave { position: absolute; inset: -25%; pointer-events: none; background: radial-gradient(ellipse at 23% 37%, rgb(var(--ambient-glow) / .24), transparent 46%), radial-gradient(ellipse at 76% 65%, rgb(var(--ambient-glow) / .15), transparent 47%); background-size: 150% 170%; will-change: transform, opacity; }
 .atmosphere-wave-one { animation: atmosphere-wave-one 19s ease-in-out infinite; }
 .atmosphere-wave-two { background: radial-gradient(ellipse at 65% 35%, rgb(var(--ambient-glow) / .2), transparent 48%), radial-gradient(ellipse at 20% 70%, #a9a5f018, transparent 45%); background-size: 170% 140%; animation: atmosphere-wave-two 25s ease-in-out infinite; }
 .page-atmosphere::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 72% 20%, #7e93c909, transparent 65%), linear-gradient(110deg, #0003, transparent 40%, #0002); }
@@ -21,14 +30,28 @@ main > #education { --section-glow: 163 139 66; --next-glow: 47 158 134; }
 main > #contact { --section-glow: 47 158 134; --next-glow: 43 101 122; }
 main > .section { border-bottom: 0; }
 main > section::before { content: ''; position: absolute; z-index: -1; pointer-events: none; top: -90px; bottom: -90px; left: 50%; width: 100vw; transform: translateX(-50%); background: radial-gradient(ellipse at 18% 40%, rgb(var(--section-glow) / .22), transparent 65%), radial-gradient(ellipse at 82% 65%, rgb(var(--section-glow) / .16), transparent 60%); mask-image: linear-gradient(transparent, #000 22%, #000 78%, transparent); opacity: .48; transition: opacity 1.6s ease; }
-main > section.atmosphere-active::before { animation: atmosphere-breathe 13s ease-in-out infinite; }
+/* Section content and its glow stay visible throughout scrolling. */
 /* A 180px shaded seam replaces the old one-pixel section rule. */
 main > section::after { content: ''; position: absolute; z-index: -1; pointer-events: none; height: 180px; width: 100vw; left: 50%; bottom: -90px; transform: translateX(-50%); background: radial-gradient(ellipse at 30% 40%, rgb(var(--section-glow) / .11), transparent 65%), radial-gradient(ellipse at 72% 65%, rgb(var(--next-glow) / .13), transparent 65%), linear-gradient(transparent, #03060b40 50%, transparent); filter: blur(15px); opacity: .75; }
-.nav-shell { background: rgb(var(--ambient-color) / .8); border-bottom-color: #ffffff05; transition: background-color 850ms ease; box-shadow: 0 14px 40px #0002; }
+.nav-shell { background: #101b2af5; border-bottom-color: #ffffff05; box-shadow: 0 14px 40px #0002; }
 .skills-display, .experience-card, .education-card, .certification-card, .project-card { border-color: rgb(var(--section-glow) / .22); box-shadow: 0 0 0 3px rgb(var(--section-glow) / .025), 0 0 0 8px rgb(var(--section-glow) / .012), 0 18px 50px #0002; }
 .projects-empty { border: 0; padding: 32px 28px; border-radius: 12px; background: linear-gradient(120deg, rgb(var(--section-glow) / .08), transparent); box-shadow: inset 0 0 35px rgb(var(--section-glow) / .04); }
 @keyframes atmosphere-breathe { 0%, 100% { opacity: .5; } 50% { opacity: .95; } }
-@keyframes atmosphere-wave-one { 0%, 100% { transform: translate3d(-6%, -4%, 0) rotate(-5deg) scale(1); opacity: .55; background-position: 10% 20%; } 50% { transform: translate3d(7%, 6%, 0) rotate(6deg) scale(1.08); opacity: .95; background-position: 85% 75%; } }
-@keyframes atmosphere-wave-two { 0%, 100% { transform: translate3d(5%, 5%, 0) rotate(6deg); opacity: .7; background-position: 80% 70%; } 50% { transform: translate3d(-7%, -5%, 0) rotate(-7deg); opacity: .35; background-position: 15% 25%; } }
+@keyframes atmosphere-wave-one { 0%, 100% { transform: translate3d(-6%, -4%, 0) rotate(-5deg) scale(1); opacity: .55; } 50% { transform: translate3d(7%, 6%, 0) rotate(6deg) scale(1.08); opacity: .95; } }
+@keyframes atmosphere-wave-two { 0%, 100% { transform: translate3d(5%, 5%, 0) rotate(6deg); opacity: .7; } 50% { transform: translate3d(-7%, -5%, 0) rotate(-7deg); opacity: .35; } }
 @media(max-width:540px) { main > section::before { top: -55px; bottom: -55px; } main > section::after { height: 120px; bottom: -60px; filter: blur(10px); } }
 @media(prefers-reduced-motion:reduce) { .page-atmosphere, .nav-shell, main > section::before { transition: none; } .atmosphere-wave { animation: none; will-change: auto; opacity: .5; } main > section.atmosphere-active::before { animation: none; opacity: .65; } }
+
+/* Real touch browsers have tighter compositor budgets than desktop emulation.
+   Keep content on the normal page layer and avoid scrolling blur/backdrop work. */
+@media (hover: none) and (pointer: coarse), (max-width: 800px) {
+  .nav-shell, .float-tag { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  main > section::before { mask-image: none; background: radial-gradient(ellipse, rgb(var(--section-glow) / .12), transparent 70%); }
+  main > section::after { filter: none; }
+  .atmosphere-wave { inset: -8%; background-size: 100% 100%; will-change: auto; }
+  .atmosphere-wave-two { display: none; }
+  .portrait-orbit::before, .portrait-orbit::after { filter: none; }
+  .portrait-orbit, .portrait-medallion, .portrait-orbit:hover .portrait-medallion { perspective: none; transform: none; }
+  .sky-star { animation: none; opacity: .4; box-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) { .atmosphere-color { transition: none; } }
