@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: portfolio-domain-staging
+  namespace: portfolio
+spec:
+  secretName: portfolio-domain-staging-tls
+  dnsNames: [annamalaidev.duckdns.org]
+  privateKey:
+    rotationPolicy: Always
+  issuerRef:
+    name: portfolio-letsencrypt-staging
+    kind: ClusterIssuer

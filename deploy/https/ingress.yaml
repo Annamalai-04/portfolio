@@ -1,0 +1,51 @@
+# Keep the existing IP/local health route on HTTP for deployment checks.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portfolio-ip-http
+  namespace: portfolio
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  ingressClassName: traefik
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port: {number: 80}
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: portfolio-https-redirect
+  namespace: portfolio
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+# Domain-only redirect; cert-manager's more-specific challenge paths remain HTTP.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portfolio-domain-http
+  namespace: portfolio
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: portfolio-portfolio-https-redirect@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: annamalaidev.duckdns.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port: {number: 80}
