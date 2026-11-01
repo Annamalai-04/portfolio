@@ -1,2 +1,14 @@
-import {useReducedMotion} from 'framer-motion';
-export default function useTilt(){const reduced=useReducedMotion();return {onPointerMove:e=>{if(reduced||e.pointerType==='touch')return;const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.transform=`perspective(1000px) rotateX(${-(e.clientY-r.top-r.height/2)/35}deg) rotateY(${(e.clientX-r.left-r.width/2)/35}deg)`},onPointerLeave:e=>{e.currentTarget.style.transform=''}}}
+import { useReducedMotion } from "framer-motion";
+export default function useTilt() {
+  const reduced = useReducedMotion();
+  return {
+    onPointerMove: (e) => {
+      if (reduced || e.pointerType === "touch") return;
+      const r = e.currentTarget.getBoundingClientRect();
+      e.currentTarget.style.transform = `perspective(1000px) rotateX(${-(e.clientY - r.top - r.height / 2) / 35}deg) rotateY(${(e.clientX - r.left - r.width / 2) / 35}deg)`;
+    },
+    onPointerLeave: (e) => {
+      e.currentTarget.style.transform = "";
+    },
+  };
+}

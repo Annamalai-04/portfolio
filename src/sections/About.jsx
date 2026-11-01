@@ -1,6 +1,7 @@
 import { Code2, ArrowUpRight } from "lucide-react";
 import { personal } from "../data/personal";
 import "../styles/portrait.css";
+import "../styles/about-responsive.css";
 export default function About() {
   return (
     <section id="about" className="section container reveal">
@@ -28,12 +29,11 @@ export default function About() {
           <h2>{personal.intro}</h2>
           <p>{personal.summary}</p>
           <p>
-            My toolkit includes Java, Python, JavaScript, Spring Boot, React,
-            GXT, and Django. I bring analytical thinking, adaptability, and a
-            collaborative approach to software development, with an interest in AI.
+             I bring analytical thinking, adaptability, and a
+            collaborative approach to software development, with an integration of AI.
           </p>
           <a className="text-link" href="#contact">
-            Let’s connect <ArrowUpRight size={16} />
+            Give me one opportunity to demonstrate my skills, dedication, and potential. <ArrowUpRight size={16} />
           </a>
           <div className="stats">
             {personal.stats.map((s) => (
@@ -43,7 +43,6 @@ export default function About() {
               </div>
             ))}
           </div>
-          <small className="muted">Based in {personal.location}.</small>
         </div>
       </div>
     </section>

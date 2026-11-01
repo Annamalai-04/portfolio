@@ -1,2 +1,52 @@
-import {experience} from '../data/experience';import {Plus,Minus} from 'lucide-react';import {useState} from 'react';
-export default function Experience(){const[open,setOpen]=useState(0);return <section id="experience" className="section container reveal"><div className="section-label">03 / THE JOURNEY</div><div className="section-heading"><h2>Learning. Building.<br/><em>Moving forward.</em></h2><p>Professional experience and the work along the way.</p></div><div className="timeline">{experience.map((e,i)=><article key={i} className="experience-entry"><span className="timeline-dot"/><span className="experience-dates">{e.dates}<small>{e.location}</small></span><div className="experience-card"><button aria-expanded={open===i} onClick={()=>setOpen(open===i?null:i)}><span><h3>{e.title}</h3><span>{e.company}</span></span>{open===i?<Minus size={20}/>:<Plus size={20}/>}</button>{open===i&&<div className="experience-detail"><p>{e.description}</p><div className="tags">{e.technologies.map(t=><span key={t}>{t}</span>)}</div></div>}</div></article>)}</div></section>}
+import { experience } from "../data/experience";
+import { Plus, Minus } from "lucide-react";
+import { useState } from "react";
+export default function Experience() {
+  const [open, setOpen] = useState(0);
+  return (
+    <section id="experience" className="section container reveal">
+      <div className="section-label">03 / THE JOURNEY</div>
+      <div className="section-heading">
+        <h2>
+          My Journeys in the World of
+          <br />
+          <em>software development.</em>
+        </h2>
+        <p>Professional experience and the Oppurtunity.</p>
+      </div>
+      <div className="timeline">
+        {experience.map((e, i) => (
+          <article key={i} className="experience-entry">
+            <span className="timeline-dot" />
+            <span className="experience-dates">
+              {e.dates}
+              <small>{e.location}</small>
+            </span>
+            <div className="experience-card">
+              <button
+                aria-expanded={open === i}
+                onClick={() => setOpen(open === i ? null : i)}
+              >
+                <span>
+                  <h3>{e.title}</h3>
+                  <span>{e.company}</span>
+                </span>
+                {open === i ? <Minus size={20} /> : <Plus size={20} />}
+              </button>
+              {open === i && (
+                <div className="experience-detail">
+                  <p>{e.description}</p>
+                  <div className="tags">
+                    {e.technologies.map((t) => (
+                      <span key={t}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}

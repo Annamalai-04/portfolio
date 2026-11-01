@@ -1,0 +1,18 @@
+/* Keep long About values from setting the grid's minimum width on phones. */
+@media (max-width: 800px) {
+  #about .about-grid { grid-template-columns: minmax(0, 1fr); }
+  #about .about-grid > * { min-width: 0; max-width: 100%; }
+  #about h2, #about p, #about .text-link, #about .stats { overflow-wrap: anywhere; }
+  #about h2 { font-size: clamp(28px, 8vw, 38px); }
+  #about .text-link { max-width: 100%; line-height: 1.65; }
+  #about .text-link svg { flex-shrink: 0; }
+  #about .portrait-orbit { width: 100%; max-width: 320px; }
+  #about .portrait-orbit-ring { transform: rotateX(23deg); }
+  #about .portrait-note { max-width: 95%; white-space: normal; text-align: center; line-height: 1.5; padding: 10px 12px; }
+  #about .portrait-note svg { flex-shrink: 0; }
+  #about .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
+  #about .stats > div { min-width: 0; }
+  #about .stats > div:last-child { grid-column: 1 / -1; }
+  #about .stats strong { white-space: normal; overflow-wrap: anywhere; line-height: 1.35; }
+  #about .stats > div:last-child strong { font-size: 20px; }
+}

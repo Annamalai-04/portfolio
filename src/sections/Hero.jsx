@@ -54,15 +54,15 @@ export default function Hero() {
     <section id="home" className="hero container">
       <div className="hero-copy">
         <div className="eyebrow">
-          <span /> CODE. CREATE. KEEP EXPLORING.
+          <span /> LOGICAL. CREATIVE. COMMUNICATIVE.
         </div>
         <p className="hello">
           Hello, I’m Annamalai <span className="wave">✳</span>
         </p>
         <h1>
-          Engineering ideas.
+          I'm Building Software <em>possibilities.</em>
           <br />
-          Building <em>possibilities.</em>
+          <small>with </small>Software Engineering ideas.
         </h1>
         <div className="role-line">
           <span>&gt;</span>
@@ -72,8 +72,7 @@ export default function Hero() {
           <b>_</b>
         </div>
         <p className="hero-description">
-          Software Developer · Java · Full Stack Development
-          <br />
+      
           Turning complex challenges into thoughtful digital experiences.
         </p>
         <div className="hero-buttons">
@@ -97,7 +96,7 @@ export default function Hero() {
         <div className="hero-social">
           <SocialLinks />
           <span className="social-divider" />
-          <span>LET’S BUILD SOMETHING MEANINGFUL</span>
+          
         </div>
       </div>
       <div className="hero-visual">
@@ -118,7 +117,7 @@ export default function Hero() {
           <span className="tiny-dot" /> AI × Creativity
         </span>
         <div className="scene-caption">
-          <span /> INTERACTIVE WORKSPACE <small>MOVE YOUR CURSOR</small>
+          <span /> INTERACTIVE WORKSPACE 
         </div>
         <span className="visual-coordinate">{"{ ideas → experiences }"}</span>
       </div>

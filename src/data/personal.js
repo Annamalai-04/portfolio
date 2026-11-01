@@ -5,13 +5,13 @@ export const personal = {
   github: "https://github.com/Annamalai-04",
   linkedin: "https://www.linkedin.com/in/annamalai-s-5a482b193/",
   resumeUrl: "/Annamalai_Selvakumar_Resume.docx",
-  intro: "Software built with purpose. Problems solved with care.",
+  intro: "I’m Wanted to pursue a Software Dev Role",
   summary:
-    "I’m Annamalai Selvakumar, a software developer with experience in designing, testing, and maintaining software systems. At Ultramain Software Limited, I worked with product and development teams on aircraft maintenance software, translating business specifications into Java updates and solutions.",
+    " I have experience in designing, testing, and maintaining software systems. I worked with product development teams for building aircraft maintenance software(MRO), translating business specifications into Java backend and database.",
   stats: [
     { label: "Professional experience", value: "1.5 years" },
-    { label: "Core programming languages", value: "3" },
-    { label: "Certifications", value: "3" },
+    { label: "Core programming", value: "JAVA" },
+    { label: "Previousely worked company", value: "Ultramain Software Limited" },
   ],
   education: {
     degree: "Bachelor of Information Technology",
