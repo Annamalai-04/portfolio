@@ -1,5 +1,4 @@
-.nav-shell{transition:background-color .85s ease}
-.starfield{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.starfield{position:fixed;inset:0;height:100lvh;z-index:-1;pointer-events:none;overflow:hidden}
 .sky-star{position:absolute;width:var(--star-size);height:var(--star-size);border-radius:50%;background:#e5f7ff;box-shadow:0 0 7px #b8deff99;animation:sky-twinkle var(--twinkle-time) ease-in-out var(--twinkle-delay) infinite;opacity:.35}
 .sky-star.sparkle{background:none;box-shadow:none;border-radius:0}
 .sky-star.sparkle::before,.sky-star.sparkle::after{content:'';position:absolute;left:50%;top:50%;background:#d1f8ff;box-shadow:0 0 6px #bdedff88;transform:translate(-50%,-50%);border-radius:50%}

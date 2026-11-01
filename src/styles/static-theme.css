@@ -1,0 +1,22 @@
+/* One stable black background. Scrolling never changes its color or opacity. */
+:root { --muted: #becbd9; }
+html, body { overflow-x: clip; background: #080b12; }
+body::before { display: none; }
+#root { position: relative; isolation: isolate; }
+.muted, .stats span { color: #b1c3cf; }
+main > section { position: relative; opacity: 1; visibility: visible; }
+main > .section { border-bottom: 0; }
+main > .tech-showcase { background: transparent; border: 0; }
+.nav-shell { background: #080b12f5; border-bottom-color: #ffffff05; box-shadow: 0 14px 40px #0002; transition: none; }
+.skills-display, .experience-card, .education-card, .certification-card, .project-card {
+  border-color: #29343f;
+  box-shadow: 0 0 0 3px #ffffff02, 0 0 0 8px #ffffff01, 0 18px 50px #0002;
+}
+.projects-empty { border: 0; padding: 32px 28px; border-radius: 12px; background: #10151f; }
+/* Avoid mobile scroll compositing through large translucent/blurred surfaces. */
+@media (hover: none) and (pointer: coarse), (max-width: 800px) {
+  .nav-shell, .float-tag { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .portrait-orbit::before, .portrait-orbit::after { filter: none; }
+  .portrait-orbit, .portrait-medallion, .portrait-orbit:hover .portrait-medallion { perspective: none; transform: none; }
+  .sky-star { animation: none; opacity: .4; box-shadow: none; }
+}

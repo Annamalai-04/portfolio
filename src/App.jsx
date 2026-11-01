@@ -10,10 +10,8 @@ import Projects from "./sections/Projects";
 import Education from "./sections/Education";
 import Contact from "./sections/Contact";
 import TechShowcase from "./components/TechShowcase";
-import useSectionAtmosphere from "./hooks/useSectionAtmosphere";
 import Starfield from "./components/Starfield";
 export default function App() {
-  useSectionAtmosphere();
   const [active, setActive] = useState("home");
   useEffect(() => {
     let frame;
@@ -41,13 +39,6 @@ export default function App() {
   }, []);
   return (
     <MotionConfig reducedMotion="user">
-      <div className="page-atmosphere" aria-hidden="true">
-        {Array.from({ length: 8 }, (_, index) => (
-          <span className={`atmosphere-color atmosphere-color-${index}`} key={index} />
-        ))}
-        <span className="atmosphere-wave atmosphere-wave-one" />
-        <span className="atmosphere-wave atmosphere-wave-two" />
-      </div>
       <a href="#main" className="skip-link">
         Skip to content
       </a>
