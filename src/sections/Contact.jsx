@@ -63,7 +63,6 @@ export default function Contact() {
             <br />
             <br />
             <em>How About ME.</em>
-            <span className="contact-star">✳</span>
           </h2>
           <p>
             to discuss an opportunity
